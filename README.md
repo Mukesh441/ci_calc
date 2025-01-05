@@ -3,6 +3,8 @@
 This directory contains data from the pytest's cache plugin, and used for testing 
 which provides the `--lf` and `--ff` options, as well as the `cache` fixture.
 
+QA changes
+
 **Do not** commit this to version control.
 
 See [the docs](https://docs.pytest.org/en/stable/how-to/cache.html) for more information.
