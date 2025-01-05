@@ -14,4 +14,5 @@ def subtract(a, b):
 if __name__ == "__main__":
     print("Addition of 3 and 5:", add(3, 5))
     print("Subtraction of 10 and 4:", subtract(10, 4))
-    
+
+    # Final newline added here.
