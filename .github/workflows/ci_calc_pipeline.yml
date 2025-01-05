@@ -36,5 +36,5 @@ jobs:
     - name: Run Unit Tests
       run: |
         pip install pytest
-        set PYTHONPATH=%cd%
+        set PYTHONPATH=%pwd%
         pytest tests/test_calc.py
