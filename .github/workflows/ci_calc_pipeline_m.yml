@@ -5,16 +5,14 @@ name: Python CI Pipeline
 on:
   push:
     branches:
-      - main
-      - dev
-      - qa
-      - prod
+      - dev   # Trigger for the dev branch
+      - qa    # Trigger for the qa branch
+      - main  # Trigger for the main (prod) branch
   pull_request:
     branches:
-      - main
-      - dev
-      - qa
-      - prod
+      - dev   # Trigger for PRs targeting dev
+      - qa    # Trigger for PRs targeting qa
+      - main  # Trigger for PRs targeting main (prod)
 
 jobs:
   build:
@@ -53,7 +51,7 @@ jobs:
         elif [ $GITHUB_REF == 'refs/heads/qa' ]; then
           echo "Running tests and tasks for QA environment"
           # Add any QA-specific tasks here (e.g., QA database setup)
-        elif [ $GITHUB_REF == 'refs/heads/prod' ]; then
+        elif [ $GITHUB_REF == 'refs/heads/main' ]; then
           echo "Running tests and tasks for Prod environment"
           # Add any Prod-specific tasks here (e.g., prod deployment setup)
         fi
