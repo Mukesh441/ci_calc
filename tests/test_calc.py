@@ -1,6 +1,10 @@
 # Unit tests for the Python application
+"""
+Test cases for the calculator module.
+"""
+
 import pytest
-from calc import add, subtract
+from calculator.calc import add, subtract
 
 def test_add():
     """Test the add function."""
@@ -18,3 +22,4 @@ def test_subtract():
 
 if __name__ == "__main__":
     pytest.main()
+
