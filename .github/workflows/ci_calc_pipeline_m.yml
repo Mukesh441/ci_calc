@@ -6,9 +6,15 @@ on:
   push:
     branches:
       - main
+      - dev
+      - qa
+      - prod
   pull_request:
     branches:
       - main
+      - dev
+      - qa
+      - prod
 
 jobs:
   build:
@@ -38,3 +44,16 @@ jobs:
         pip install pytest
         export PYTHONPATH=$(pwd)
         pytest tests/test_calc.py
+
+    - name: Environment-specific configurations
+      run: |
+        if [ $GITHUB_REF == 'refs/heads/dev' ]; then
+          echo "Running tests and tasks for Dev environment"
+          # Add any Dev-specific tasks here (e.g., dev database setup)
+        elif [ $GITHUB_REF == 'refs/heads/qa' ]; then
+          echo "Running tests and tasks for QA environment"
+          # Add any QA-specific tasks here (e.g., QA database setup)
+        elif [ $GITHUB_REF == 'refs/heads/prod' ]; then
+          echo "Running tests and tasks for Prod environment"
+          # Add any Prod-specific tasks here (e.g., prod deployment setup)
+        fi
