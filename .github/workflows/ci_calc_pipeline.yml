@@ -36,5 +36,5 @@ jobs:
     - name: Run Unit Tests
       run: |
         pip install pytest
-        set PYTHONPATH=%cd%
+        set PYTHONPATH=C:\Users\Prateek Jain Sethi\OneDrive\Desktop\devops\CI_CD_TEST
         pytest tests/test_calc.py
