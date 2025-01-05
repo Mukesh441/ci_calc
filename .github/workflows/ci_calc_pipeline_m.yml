@@ -1,0 +1,57 @@
+# GitHub Actions CI pipeline for Python application
+# Place this file in the .github/workflows directory of your repository
+name: Python CI Pipeline
+
+on:
+  push:
+    branches:
+      - dev   # Trigger for the dev branch
+      - qa    # Trigger for the qa branch
+      - main  # Trigger for the main (prod) branch
+  pull_request:
+    branches:
+      - dev   # Trigger for PRs targeting dev
+      - qa    # Trigger for PRs targeting qa
+      - main  # Trigger for PRs targeting main (prod)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Specify Python version
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Static Code Analysis
+      run: |
+        pip install pylint
+        pylint **/*.py
+
+    - name: Run Unit Tests
+      run: |
+        pip install pytest
+        export PYTHONPATH=$(pwd)
+        pytest tests/test_calc.py
+
+    - name: Environment-specific configurations
+      run: |
+        if [ $GITHUB_REF == 'refs/heads/dev' ]; then
+          echo "Running tests and tasks for Dev environment"
+          # Add any Dev-specific tasks here (e.g., dev database setup)
+        elif [ $GITHUB_REF == 'refs/heads/qa' ]; then
+          echo "Running tests and tasks for QA environment"
+          # Add any QA-specific tasks here (e.g., QA database setup)
+        elif [ $GITHUB_REF == 'refs/heads/main' ]; then
+          echo "Running tests and tasks for Prod environment"
+          # Add any Prod-specific tasks here (e.g., prod deployment setup)
+        fi
